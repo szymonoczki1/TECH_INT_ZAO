@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <title>World of Taxis</title>
   <link rel="stylesheet" href="taxi.css">
 </head>
@@ -84,12 +85,12 @@
     <section id="gallery">
       <h2>Taxi Gallery</h2>
       <ul>
-        <li>Great britain taxis<ul>
-          <li><img src="img/taxigb1.jpg" alt="Taxi GB 1" width="300" height="200"></li>
-          <li><img src="img/taxigb2.jpg" alt="Taxi GB 2" width="300" height="200"></li>
+        <li><div class="gallerytitle">Great Britain taxis</div><ul>
+          <li><img id="taxigb1" src="img/taxigb1.jpg" alt="Taxi GB 1" width="300" height="200"></li>
+          <li><img id="taxigb2" src="img/taxigb2.jpg" alt="Taxi GB 2" width="300" height="200"></li>
         </ul></li>
           
-        <li>American taxis<ul>
+        <li><div class="gallerytitle">American taxis</div><ul>
           <li><img src="img/taxiamerican1.jpg" alt="Taxi American 1" width="300" height="200"></li>
           <li><img src="img/taxiamerican2.jpg" alt="Taxi American 2" width="300" height="200"></li>
         </ul></li>
@@ -182,7 +183,7 @@
           <label for="dateTime">Date and Time:</label><br>
           <input type="datetime-local" id="dateTime" name="dateTime" required><br><br>
 
-          <label for="photo">Attach a Photo:</label><br>
+          <label for="photo" class="fileupload">Attach a Photo</label><br>
           <input type="file" id="photo" name="photo" accept="image/*"><br><br>
 
           <label for="comments">Additional Comments:</label><br>
