@@ -1,23 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
     const maxWaterings = 7;
-    const maxPlantSize = window.innerHeight * 0.18;
+    const maxPlantSize = window.innerHeight * 0.3;
+    //const maxPlantSize = window.innerHeight * 0.18;
     
-    let gardens = [[null, null, null], [null, null, null]]; // Two planter boxes
+    let gardens = [[null, null, null], [null, null, null]];
     let selectedPlant = "img/plant1.png";
     
     document.querySelectorAll("#plant_choice img").forEach(img => {
         img.addEventListener("click", () => {
             document.querySelectorAll("#plant_choice img").forEach(item => {
-                item.classList.remove("selected-plant"); // Remove the 'selected-plant' class from all plants
+                item.classList.remove("selected-plant");
             });
             
-            // Add the scale effect to the clicked plant
             img.classList.add("selected-plant");
     
-            // Update selected plant source
             selectedPlant = img.src;
     
-            // If all planters are empty, add the selected plant
             if (gardens.flat().every(plant => plant === null)) {
                 addPlantToEmptyPlanter(selectedPlant);
             }
@@ -36,8 +34,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("waterdrop").addEventListener("click", () => {
         let allPlants = gardens.flat().filter(plant => plant !== null);
-        //let waterPerPlant = allPlants.length > 0 ? 1 / allPlants.length : 0;
         let waterPerPlant = 1
+        const thresholds = [1, 2, 3, 4, 5, 6, 7];
+        const translateYValues = [9, 18, 25, 31.3, 37, 42.5, 48];
+        //const translateYValues = [9, 18, 25, 32, 38, 43, 44];
+        const translateXValues = [2, 5, 8, 12, 16, 20, 24];
+        //const translateXValues = [2, 5, 8, 11, 14, 17, 18];
         allPlants.forEach(plant => {
             plant.waterCount = (plant.waterCount || 0) + waterPerPlant;
             if (plant.waterCount > maxWaterings) {
@@ -45,32 +47,25 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 let newSize = Math.min(parseFloat(plant.style.height) * 1.1, maxPlantSize);
                 plant.style.height = `${newSize}px`;
-                //plant.translateY = -25; //9 18 25 32 38 43 44
-                //plant.style.transform = `translateY(${plant.translateY}%)`;
 
-                const thresholds = [1, 2, 3, 4, 5, 6, 7];  // Water count levels
-                const translateYValues = [9, 18, 25, 32, 38, 43, 44]; // Corresponding translateY values
-                const translateXValues = [2, 5, 8, 11, 14, 17, 18]
-                let index = thresholds.indexOf(plant.waterCount)
+                let index = thresholds.indexOf(plant.waterCount);
                 //alert(translateYValues[index])
 
                 plant.style.transform = `translateY(-${translateYValues[index]}%) translateX(-${translateXValues[index]}%)`;
-
             }
         });
 
         let alertMessage = '';
         allPlants.flat().forEach((plant, index) => {
             if (plant.waterCount === maxWaterings) {
-                const plantIndex = index + 1; // +1 to make the index human-readable
+                const plantIndex = index + 1;
                 alertMessage += `Roślina numer ${plantIndex} osiągneła maksymalną wysokość.\n`;
             }
         });
     
         if (alertMessage) {
-            alert(alertMessage); // Only show the alert if there are any plants to notify
+            alert(alertMessage);
         }
-
     });
 
 
@@ -92,13 +87,12 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if (plantIndex >= 0 && plantIndex < allPlants.length) {
             let plant = allPlants[plantIndex];
-            plant.remove(); // Remove plant from the DOM
+            plant.remove();
 
-            // Find which planter the plant was in and remove it from the garden array
             let planterIndex = gardens.findIndex(planter => planter.includes(plant));
             if (planterIndex !== -1) {
                 let plantIndexInPlanter = gardens[planterIndex].indexOf(plant);
-                gardens[planterIndex][plantIndexInPlanter] = null; // Mark the spot as empty
+                gardens[planterIndex][plantIndexInPlanter] = null;
             }
         }
     });
@@ -108,8 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
         plant.src = src;
         plant.style.position = "absolute";
         plant.style.height = "100px";
-        //plant.style.left = "62%"; //34 40 46  50 56 62
-        plant.style.top = "39.1%";
+        plant.style.top = "53%";
+        //plant.style.top = "39.1%";
         plant.waterCount = 0;
         plant.translateY = 0;
 

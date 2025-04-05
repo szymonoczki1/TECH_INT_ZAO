@@ -6,7 +6,6 @@ div#simulator {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
 }
 
 div#garden_main{
@@ -16,7 +15,7 @@ div#garden_main{
 div#graden_main img#planter1 {
     border-radius: 5px;
     position: absolute;
-    top: 49%;
+    top: 65%;
     left: 35%;
     height: auto;
     width: 15%
@@ -25,7 +24,7 @@ div#graden_main img#planter1 {
 div#graden_main img#planter2 {
     border-radius: 5px;
     position: absolute;
-    top: 49%;
+    top: 65%;
     left: 51%;
     height: auto;
     width: 15%
@@ -93,6 +92,6 @@ div#control_panel img {
 
 
 .selected-plant {
-    transform: scale(1.25);  /* Makes the selected plant 30% bigger */
-    transition: transform 0.2s ease-in-out;  /* Smooth transition for scaling */
+    transform: scale(1.25);
+    transition: transform 0.2s ease-in-out;
 }
