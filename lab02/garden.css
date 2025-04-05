@@ -1,0 +1,98 @@
+body {
+    background-color: rgb(160, 154, 71);
+}
+
+div#simulator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+div#garden_main{
+    position: relative;
+}
+
+div#graden_main img#planter1 {
+    border-radius: 5px;
+    position: absolute;
+    top: 49%;
+    left: 35%;
+    height: auto;
+    width: 15%
+}
+
+div#graden_main img#planter2 {
+    border-radius: 5px;
+    position: absolute;
+    top: 49%;
+    left: 51%;
+    height: auto;
+    width: 15%
+}
+
+div img#background {
+    border-radius:  15px;
+    height: auto;
+}
+
+div#control_panel {
+    margin-top: 10px;
+    width: 70%;
+    display: flex;
+}
+
+div#control_panel div#icons_left {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+    align-items: center;
+    gap: 15px;
+}
+
+div#control_panel div#icons_left img {
+    height: auto;
+    width: 40%;
+}
+
+div#control_panel div#plant_choice {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    align-items: center;
+    width: 60%;
+}
+
+div#control_panel div#plant_choice img {
+    height: 170px;
+}
+
+div#control_panel div#icons_right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    width: 20%;
+    gap: 20px;
+}
+
+div#control_panel div#icons_right img {
+    height: auto;
+    width: 70%;
+}
+
+div#control_panel img:hover {
+    transform: scale(1.25);
+}
+
+div#control_panel img {
+    transition: transform 0.3s ease;
+}
+
+
+.selected-plant {
+    transform: scale(1.25);  /* Makes the selected plant 30% bigger */
+    transition: transform 0.2s ease-in-out;  /* Smooth transition for scaling */
+}
