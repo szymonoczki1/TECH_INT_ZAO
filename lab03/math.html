@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="math.css">
     <script src="math.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <div id="main">
@@ -20,11 +21,64 @@
         </ul>
     </div>
     <div id="mathpart">
-        <div id="dodawanie">dodawanie</div>
-        <div id="odejmowanie">odejmowanie</div>
-        <div id="mnozeniemac">mnozeniemac</div>
-        <div id="mnozenieska">mnozenieska</div>
-        <div id="odwracanie">odwracanie</div>
+
+        <div id="dodawanie" class="base">
+            <div id="matrixInputADD">
+                <label for="rowsADD">Rows:</label>
+                <input type="number" id="rowsADD" placeholder="Number of rows" min="1">
+    
+                <label for="colsADD">Columns:</label>
+                <input type="number" id="colsADD" placeholder="Number of columns" min="1">
+    
+                <button id="generateMatrixADD">Generate Matrix</button>
+            </div>
+    
+            <div class="matrix-container" id="matrix-containerADD">
+                <div class="matrix" id="matrix1ADD">
+                    <!-- Matrix 1 input fields -->
+                </div>
+                <div id="signadd">+</div>
+                <div class="matrix" id="matrix2ADD">
+                    <!-- Matrix 2 input fields -->
+                </div>
+            </div>
+    
+            <button id="calculateButtonADD">Calculate</button>
+            
+            <div id="stepsADD"></div>
+        </div>
+
+
+
+
+        <div id="odejmowanie" class="base">
+            <div id="matrixInput">
+                <label for="rowsSUB">Rows:</label>
+                <input type="number" id="rowsSUB" placeholder="Number of rows" min="1">
+    
+                <label for="colsSUB">Columns:</label>
+                <input type="number" id="colsSUB" placeholder="Number of columns" min="1">
+    
+                <button id="generateMatrixSUB">Generate Matrix</button>
+            </div>
+    
+            <div class="matrix-container">
+                <div class="matrix" id="matrix1">
+                    <!-- Matrix 1 input fields -->
+                </div>
+                <div id="signsub">-</div>
+                <div class="matrix" id="matrix2">
+                    <!-- Matrix 2 input fields -->
+                </div>
+            </div>
+    
+            <button id="calculateButton">Calculate</button>
+            
+            <div id="steps"></div>
+        </div>
+        <div id="mnozeniemac" class="base">mnozeniemac</div>
+        <div id="mnozenieska" class="base">mnozenieska</div>
+        <div id="odwracanie" class="base">odwracanie</div>
     </div>
     
 </body>

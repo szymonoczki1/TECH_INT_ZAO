@@ -21,10 +21,8 @@ div#main header {
 
 }
 
-
-
 div#main ul {
-    
+    padding: 0;
     display: flex;
     justify-content: space-around;
     gap: 30px;
@@ -32,11 +30,6 @@ div#main ul {
     list-style-type: none;
     text-decoration: none;
     
-}
-
-
-input {
-    width: 40px;
 }
 
 div#mathpart div.base {
@@ -50,24 +43,5 @@ div#mathpart div.shown {
     display: flex;
 }
 
-div#mathpart div#dodawanie div.matrix-container {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-}
 
 
-
-div#signadd {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-}
-
-div#signsub {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-}
