@@ -12,12 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     listItems.forEach(li => {
         li.addEventListener("click", () => {
-            // Hide all content divs
             document.querySelectorAll("#mathpart > div").forEach(div => {
                 div.classList.remove("shown");
             });
 
-            // Get the ID of the corresponding div
             const id = contentDivs[li.textContent.trim()];
             
             if (id) {
@@ -26,29 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // document.getElementById("calculate").addEventListener("click", function () {
-    //     const rawInput = document.getElementById("functionInput").value.trim();
 
-    //     try {
-    //         // Insert * between number and variable (e.g., 3x -> 3*x)
-    //         const input = rawInput.replace(/(\\d)([a-zA-Z])/g, '$1*$2');
+    // derivative
 
-    //         const node = math.parse(input);
-    //         const derivative = math.derivative(node, 'x');
-
-    //         const originalLatex = node.toTex({ parenthesis: 'keep' });
-    //         const derivativeLatex = derivative.toTex({ parenthesis: 'keep' });
-
-    //         document.getElementById("derivativeSteps").innerHTML =
-    //             `$$\\frac{d}{dx}\\left(${originalLatex}\\right) = ${derivativeLatex}$$`;
-
-    //         MathJax.typeset();
-    //     } catch (error) {
-    //         document.getElementById("derivativeSteps").innerHTML = "⚠️ Invalid function input.";
-    //     }
-    // });
-
-    // --- Derivative Calculation ---
     const derivativeBtn = document.getElementById("differentiate");
     if (derivativeBtn) {
         derivativeBtn.addEventListener("click", function () {
@@ -218,7 +196,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const resultEl = document.getElementById("limitResult");
 
         try {
-            // Build nerdamer limit expression (two-sided only)
             const limitExpr = nerdamer(`limit(${exprInput}, x, ${pointInput})`);
             const result = limitExpr.toTeX();
 
@@ -229,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
             MathJax.typesetPromise();
         } catch (error) {
-            resultEl.innerHTML = `<span style="color: red;">⚠️ Invalid expression or limit</span>`;
+            resultEl.innerHTML = '⚠️ Invalid expression or limit';
         }
     }
 
