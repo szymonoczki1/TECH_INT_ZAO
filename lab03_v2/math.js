@@ -32,6 +32,11 @@ document.addEventListener("DOMContentLoaded", function () {
         derivativeBtn.addEventListener("click", function () {
             const rawInput = document.getElementById("functionInput").value.trim();
             try {
+
+                if (rawInput === ''){
+                    throw new Error("Empty input");
+                }
+
                 const input = rawInput.replace(/(\d)([a-zA-Z])/g, '$1*$2');
                 const node = math.parse(input);
                 const derivative = math.derivative(node, 'x');
@@ -87,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     (left.isConstantNode && right.isOperatorNode && right.op === '^' && right.args[0].isSymbolNode && right.args[0].name === 'x') ||
                     (right.isConstantNode && left.isOperatorNode && left.op === '^' && left.args[0].isSymbolNode && left.args[0].name === 'x')
                 )) {
-                    // Normalize order: constant * x^n
+                    // normalize order: (constant * x^n)
                     const constant = left.isConstantNode ? left.value : right.value;
                     const powerNode = left.isConstantNode ? right : left;
                     const n = powerNode.args[1].value;
@@ -119,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
     
                 if (node.op === '*') {
-                    // Apply the product rule: d/dx(u * v) = u' * v + u * v'
+                    // product rule: d/dx(u * v) = u' * v + u * v'
                     return `
                         Using the <i>product rule</i>:<br>
                         $$\\frac{d}{dx}(u \\cdot v) = u'v + uv'$$<br>
@@ -139,13 +144,18 @@ document.addEventListener("DOMContentLoaded", function () {
         return recurse(node);
     }
 
-    // --- Integral Calculation (Symbolic Approximation) ---
+    // integrals
     const integrateBtn = document.getElementById("integrate");
     if (integrateBtn) {
         integrateBtn.addEventListener("click", function () {
             const rawInput = document.getElementById("integralInput").value.trim();
 
             try {
+
+                if (rawInput === ''){
+                    throw new Error("Empty input");
+                }
+
                 const input = rawInput.replace(/(\d)([a-zA-Z])/g, '$1*$2');
                 const node = math.parse(input);
                 const texInput = node.toTex({ parenthesis: 'keep' });
@@ -199,7 +209,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const limitExpr = nerdamer(`limit(${exprInput}, x, ${pointInput})`);
             const result = limitExpr.toTeX();
 
-            // Pretty LaTeX output
             resultEl.innerHTML = `
             <div><b>Function:</b> $$\\lim_{x \\to ${pointInput}} ${nerdamer(exprInput).toTeX()}$$</div>
             <div><b>Limit:</b> $$\\lim_{x \\to ${pointInput}} ${nerdamer(exprInput).toTeX()} = ${result}$$</div>
