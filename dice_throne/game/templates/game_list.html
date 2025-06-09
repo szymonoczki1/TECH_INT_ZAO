@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Games - Dice Throne{% endblock %}
+{% block content %}
+<h2>Games</h2>
+{% for game in games %}
+<div class="game-block">
+    <h3>Game {{ game.id }} on {{ game.date|date:"Y-m-d H:i" }}</h3>
+    <table class="game-table">
+        <tr>
+            <th>Player</th>
+            <th>Character</th>
+            <th>Win?</th>
+            <th>HP Remaining</th>
+        </tr>
+        {% for result in game.gameresult_set.all %}
+        <tr>
+            <td>{{ result.user.username }}</td>
+            <td>{{ result.character.name }}</td>
+            <td>{% if result.is_winner %}Yes{% else %}No{% endif %}</td>
+            <td>{{ result.hp_remaining }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% empty %}
+    <p class="nogamesfound">No games found.</p>
+{% endfor %}
+{% endblock %}

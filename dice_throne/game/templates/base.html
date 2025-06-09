@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'game/base.css' %}">
+    <link rel="stylesheet" href="{% static 'game/create_game.css' %}">
+    <link rel="stylesheet" href="{% static 'game/game_list.css' %}">
+    <link rel="stylesheet" href="{% static 'game/character_picker.css' %}">
+    <link rel="stylesheet" href="{% static 'game/auth.css' %}">
+    <title>{% block title %}Dice Throne{% endblock %}</title>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="{% static 'game/logo2.png' %}" alt="Dice Throne Logo" width="100" height="100">
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'create_game' %}">New Game</a></li>
+                <li><a href="{% url 'game_list' %}">Game List</a></li>
+                <li><a href="{% url 'random_character' %}">Character Picker</a></li>
+                {% if not user.is_authenticated %}
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                {% else %}
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer>
+        <p>&copy; 2025 Dice Throne League</p>
+    </footer>
+</body>
+</html>

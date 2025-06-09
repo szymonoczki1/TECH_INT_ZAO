@@ -1,0 +1,64 @@
+.character-picker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px auto;
+    padding: 32px 40px;
+    background: #23235b;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    max-width: 480px;
+}
+
+.character-picker-container h2 {
+    color: #ffd700;
+    font-size: 2em;
+    margin-bottom: 24px;
+}
+
+.character-picker-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 10px;
+}
+
+.character-picker-container select,
+.character-picker-container input[type="checkbox"] {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #888;
+    background: #fff;
+    color: #23235b;
+    font-size: 1em;
+}
+
+.character-picker-container label {
+    color: #ffd700;
+    font-size: 1em;
+    margin-top: 10px;
+    margin-right: 6px;
+}
+
+.character-picker-container button[type="submit"] {
+    padding: 8px 22px;
+    background: #ffd700;
+    color: #23235b;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.character-picker-container button[type="submit"]:hover {
+    background: #ffe066;
+}
+
+.character-picker-container .picked-character {
+    margin-left: 18px;
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 1.1em;
+}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Random Character Picker{% endblock %}
+{% block content %}
+<div class="character-picker-container">
+    <h2>Random Character Picker</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="user">Select User:</label>
+        <select name="user" id="user">
+            <option value="">-- Select --</option>
+            {% for user in users %}
+            <option value="{{ user.id }}" {% if selected_user and user.id == selected_user.id %}selected{% endif %}>{{ user.username }}</option>
+            {% endfor %}
+        </select>
+        <label>
+            <input type="checkbox" name="all_characters" {% if all_characters %}checked{% endif %}>
+            Disable least played characters preference
+        </label>
+
+        {% if chosen_character %}
+            <h3>Random Character for {{ selected_user.username }}: <span style="color:#ffd700">{{ chosen_character.name }}</span></h3>
+        {% endif %}
+
+        <button type="submit">Pick Character</button>
+    </form>
+</div>
+
+{% endblock %}
