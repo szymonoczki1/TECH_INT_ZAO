@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'game/game_list.css' %}">
     <link rel="stylesheet" href="{% static 'game/character_picker.css' %}">
     <link rel="stylesheet" href="{% static 'game/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'game/stats.css' %}">
     <title>{% block title %}Dice Throne{% endblock %}</title>
 </head>
 <body>
@@ -21,6 +22,7 @@
                 <li><a href="{% url 'create_game' %}">New Game</a></li>
                 <li><a href="{% url 'game_list' %}">Game List</a></li>
                 <li><a href="{% url 'random_character' %}">Character Picker</a></li>
+                <li><a href="{% url 'player_stats' %}">Stats</a></li>
                 {% if not user.is_authenticated %}
                     <li><a href="{% url 'register' %}">Register</a></li>
                     <li><a href="{% url 'login' %}">Login</a></li>

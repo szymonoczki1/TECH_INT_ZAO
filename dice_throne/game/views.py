@@ -1,12 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import Game, Character, GameResult
+from .models import Game, Character, GameResult, GameTeam
 from django.contrib.auth.models import User
 import random
-from django.db.models import Count, Q
+from django.db.models import Count, Avg
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import SimpleRegisterForm
+from collections import Counter
 
 def home(request):
     return render(request, 'home.html')
@@ -31,12 +32,20 @@ def create_game(request):
                 char_id = request.POST.get(f'char_{i}')
                 win = request.POST.get(f'win_{i}') == 'on'
                 hp = request.POST.get(f'hp_{i}') or 0
+                team_number = request.POST.get(f'team_{i}')
+                if not team_number:
+                    team_number = str((selected_players.index(i) % 8) + 1)
                 GameResult.objects.create(
                     game=game,
                     user=users[i],
                     character_id=char_id,
                     is_winner=win,
                     hp_remaining=hp,
+                )
+                GameTeam.objects.create(
+                    game=game,
+                    user=users[i],
+                    team_number=team_number,
                 )
             return redirect('game_list')
 
@@ -103,3 +112,49 @@ def register(request):
     else:
         form = SimpleRegisterForm()
     return render(request, 'register.html', {'form': form})
+
+
+def player_stats(request):
+    users = User.objects.all()
+    selected_user = None
+    stats = None
+
+    if request.method == 'POST':
+        user_id = request.POST.get('user')
+        if user_id:
+            selected_user = User.objects.get(id=user_id)
+            results = GameResult.objects.filter(user=selected_user)
+            games_played = results.count()
+            wins = results.filter(is_winner=True).count()
+            win_rate = (wins / games_played * 100) if games_played else 0
+            avg_hp = results.aggregate(avg_hp=Avg('hp_remaining'))['avg_hp'] or 0
+
+            # Most played character
+            char_count = results.values('character__name').annotate(cnt=Count('id')).order_by('-cnt').first()
+            most_played_character = char_count['character__name'] if char_count else None
+
+            # Most played with (teammate)
+            teammate_counter = Counter()
+            user_teams = GameTeam.objects.filter(user=selected_user)
+            for ut in user_teams:
+                teammates = GameTeam.objects.filter(
+                    game=ut.game,
+                    team_number=ut.team_number
+                ).exclude(user=selected_user)
+                for teammate in teammates:
+                    teammate_counter[teammate.user.username] += 1
+            most_played_with = teammate_counter.most_common(1)[0][0] if teammate_counter else None
+
+            stats = {
+                'games_played': games_played,
+                'win_rate': win_rate,
+                'avg_hp': avg_hp,
+                'most_played_character': most_played_character,
+                'most_played_with': most_played_with,
+            }
+
+    return render(request, 'player_stats.html', {
+        'users': users,
+        'selected_user': selected_user,
+        'stats': stats,
+    })

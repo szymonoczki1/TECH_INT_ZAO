@@ -8,6 +8,7 @@
     <table class="game-table">
         <tr>
             <th>Player</th>
+            <th>Team</th>
             <th>Character</th>
             <th>Win?</th>
             <th>HP Remaining</th>
@@ -15,6 +16,13 @@
         {% for result in game.gameresult_set.all %}
         <tr>
             <td>{{ result.user.username }}</td>
+            <td>
+                {% for team in result.user.gameteam_set.all %}
+                    {% if team.game.id == game.id %}
+                        {{ team.team_number }}
+                    {% endif %}
+                {% endfor %}
+            </td>
             <td>{{ result.character.name }}</td>
             <td>{% if result.is_winner %}Yes{% else %}No{% endif %}</td>
             <td>{{ result.hp_remaining }}</td>

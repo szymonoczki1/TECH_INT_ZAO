@@ -24,3 +24,11 @@ class GameResult(models.Model):
 
     def __str__(self):
         return f"{self.user.username} played {self.character} in Game {self.game.id}"
+    
+class GameTeam(models.Model):
+    game = models.ForeignKey('Game', on_delete=models.CASCADE)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    team_number = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f"Game {self.game.id} - {self.user.username} (Team {self.team_number})"

@@ -8,6 +8,7 @@
         <table>
             <tr>
                 <th>Player</th>
+                <th>Team</th>
                 <th>Character</th>
                 <th>Win?</th>
                 <th>HP Remaining</th>
@@ -16,6 +17,9 @@
             <tr>
                 <td>
                     <input type="checkbox" name="user_{{ forloop.counter0 }}" value="{{ user.id }}"> {{ user.username }}
+                </td>
+                <td>
+                    <input type="number" name="team_{{ forloop.counter0 }}" min="1" max="8" style="width: 50px;">
                 </td>
                 <td>
                     <select name="char_{{ forloop.counter0 }}">

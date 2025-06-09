@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Player Stats{% endblock %}
+{% block content %}
+<div class="stats-container">
+    <h2>Player Stats</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="user">Select Player:</label>
+        <select name="user" id="user">
+            <option value="">-- Select --</option>
+            {% for user in users %}
+                <option value="{{ user.id }}" {% if selected_user and user.id == selected_user.id %}selected{% endif %}>{{ user.username }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Show Stats</button>
+    </form>
+
+    {% if stats %}
+    <div class="stats-block">
+        <h3>Stats for {{ selected_user.username }}</h3>
+        <ul>
+            <li>Games played: {{ stats.games_played }}</li>
+            <li>Win rate: {{ stats.win_rate|floatformat:2 }}%</li>
+            <li>Average HP left: {{ stats.avg_hp|floatformat:2 }}</li>
+            <li>Most played character: {{ stats.most_played_character|default:"-" }}</li>
+            <li>Most played with: {{ stats.most_played_with|default:"-" }}</li>
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
