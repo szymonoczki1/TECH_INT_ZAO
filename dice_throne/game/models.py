@@ -11,7 +11,6 @@ class Character(models.Model):
 
 class Game(models.Model):
     date = models.DateTimeField(auto_now_add=True)
-    winner = models.ForeignKey(User, related_name='won_games', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"Game {self.id} on {self.date}"

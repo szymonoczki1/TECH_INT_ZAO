@@ -6,6 +6,7 @@ import random
 from django.db.models import Count, Q
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from .forms import SimpleRegisterForm
 
 def home(request):
     return render(request, 'home.html')
@@ -91,19 +92,6 @@ def random_character(request):
         'all_characters': all_characters,
     })
 
-
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Account created successfully. You can now log in.")
-            return redirect('login')  # or wherever your login page is
-    else:
-        form = UserCreationForm()
-    return render(request, 'register.html', {'form': form})
-
-from .forms import SimpleRegisterForm
 
 def register(request):
     if request.method == 'POST':
