@@ -19,6 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('game.urls')),  # This makes '' (the root) go to your app's home
+    path('', include('game.urls')),
 ]
 

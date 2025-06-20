@@ -1,8 +1,19 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Home - Dice Throne{% endblock %}
 
 {% block content %}
-    <h1>Welcome to Dice Throne</h1>
-    <p>This is the home page.</p>
+<div class="home-container">
+    <h1>Welcome to Dice Throne Tracker</h1>
+    <p>Your ultimate companion for Dice Throne battles!</p>
+
+    <p>This site is designed for fans of the Dice Throne board game who want to keep track of every match. Register to log your games, explore a complete history of past battles, and analyze detailed stats for each player.</p>
+
+    <p>Need help choosing your next hero? Use our built-in random character selector — pick from two different algorithms to keep things fair or shake things up!</p>
+
+    <p>Whether you're a casual player or a seasoned competitor, Dice Throne Tracker helps you stay organized, competitive, and ready for your next showdown.</p>
+
+    <img src="{% static 'game/home.png' %}" alt="Dice Throne Background">
+</div>
 {% endblock %}
